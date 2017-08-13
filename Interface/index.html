@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>记账簿</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="./plugins/Font-awesome/css/font-awesome.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="./plugins/datatables/dataTables.bootstrap.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <header class="main-header">
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>￥</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>个人账簿管理系统</b></span>
+    </a>
+    <nav class="navbar navbar-static-top">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+        
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+        <li class="header">页面菜单</li>
+        <li><a href="#" onclick="ksBalance();"><i class="fa fa-money text-red"></i> <span>余额</span></a></li>
+        <li><a href="#" onclick="ksTable();"><i class="fa fa-th-list text-yellow"></i> <span>列表</span></a></li>
+        <li><a href="#" onclick="ksCharts();"><i class="fa fa-pie-chart text-aqua"></i> <span>图表</span></a></li>
+        <li><a href="#" onclick="ksCog();"><i class="fa fa-cogs text-green"></i> <span>管理</span></a></li>        
+        <li class="header">功能菜单</li>
+        <li><a href="#" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus text-red"></i> <span>添加记录</span></a></li>
+        <li><a href="#" data-toggle="modal" data-target="#addSortModal"><i class="fa fa-plus text-success"></i> <span>添加分类</span></a></li>        
+      </ul>
+    </section>
+  </aside>
+
+  <div class="content-wrapper">
+    <section class="content" id="documentbox">
+    </section>
+  </div>
+  
+  <footer class="main-footer text-right">
+    <strong>个人账簿管理系统</strong>
+  </footer>
+</div>
+<!--添加记录模态框-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><b style="color:#5bc0de;">添加记录</b></h4>
+      </div>
+      <div class="modal-body">
+          <div class="row" style="margin-bottom: 10px;">
+            <div class="col-xs-6">
+              <label for="addMainType">记录主类</label>
+              <select class="form-control" id="addMainType" required>
+                <option>收入</option>
+                <option>支出</option>
+              </select>
+            </div>
+            <div class="col-xs-6">
+              <label for="addType">记录分类</label>
+              <select class="form-control" id="addType">
+              </select>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom: 50px;">
+            <div class="col-xs-6">
+              <label for="addMoney">金额</label>
+              <input type="number" class="form-control" id="addMoney" placeholder="(单位：元)">
+            </div>
+            <div class="col-xs-6">
+              <label for="addDate">日期</label>
+              <input type="date" class="form-control" id="addDate">
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary btn-block" onclick="addRecording()">确认提交</button>
+          </div>    
+      </div>
+    </div>
+  </div>
+</div>
+<!--添加分类模态框 -->
+<div class="modal fade" id="addSortModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><b style="color:#5bc0de;">添加分类</b></h4>
+      </div>
+      <div class="modal-body">
+          <div class="row" style="margin-bottom: 30px;">
+            <div class="col-xs-6">
+              <label for="addSortMainType">记录主类</label>
+              <select class="form-control" id="addSortMainType" required>
+                <option>收入</option>
+                <option>支出</option>
+              </select>
+            </div>
+            <div class="col-xs-6">
+              <label for="addSortType">记录分类</label>
+              <input type="text" class="form-control" id="addSortType">
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary btn-block" onclick="addType();">确认添加</button>
+          </div>    
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery 2.2.3 -->
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Slimscroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="./plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="./plugins/Highcharts-5.0.12/code/highcharts.js"></script>
+
+<script src="./dist/js/api.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>

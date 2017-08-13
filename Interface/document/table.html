@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row" style="margin-bottom: 10px;">
+          <div class="col-xs-3">
+            <label for="startDate">起始日期</label>
+            <input type="date" class="form-control" id="startDate">
+          </div>
+          <div class="col-xs-3">
+            <label for="endDate">截止日期</label>
+            <input type="date" class="form-control" id="endDate">
+          </div>
+          <div class="col-xs-3 col-sm-2 col-md-4">
+            <label for="addType">记录分类</label>
+            <select class="form-control" id="filterType">
+            </select>
+          </div>
+          <div class="col-xs-3 col-sm-4 col-md-2 pull-right text-right">
+            <label for="endDate">操作</label><br>
+            <button class="btn btn-primary" onclick="filterRecording();"><i class="fa fa-filter" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button class="btn btn-default" onclick="ksTable();"><i class="fa fa-refresh" aria-hidden="true"></i></button>            
+          </div>
+        </div>
+        <table id="tableKs" class="table table-hover">
+            <thead>
+                <th>时间</th>
+                <th>主类型</th>
+                <th>类型</th>
+                <th>金额</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
