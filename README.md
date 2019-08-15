@@ -27,13 +27,3 @@
 &emsp;&emsp;后台采用的express快速搭建,只有两个API,即读取文件及存储文件,其余的数据操作都交由前台完成.数据存储在内存中,用户修改后即存即读即刷新,采用这种看似很不符合规范的方式也是当时技术能力有限的无奈之举
 
 &emsp;&emsp;前台则是采用了adminLTE页面框架和一些插件组合而成,采用了load加载的单页面应用
-
-
-## 技术栈
-
-| 语言 | JS框架 | CSS框架 | 后台框架 | 页面框架 | 表插件 |
-|-|-|-|-|-|-|-|
-|HTML,CSS,JS(Node)|jQuery|BootStrap|Express | adminLTE | heightchart \|
-
-
-
